@@ -61,6 +61,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Добавляем цвета брендов магазинов
+				brand: {
+					magnit: '#E30613',
+					tabris: '#35BFB5',
+					lenta: '#004C9B',
+					pyaterochka: '#ED1C24',
 				}
 			},
 			borderRadius: {

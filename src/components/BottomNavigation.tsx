@@ -4,7 +4,8 @@ const BottomNavigation = () => {
   const navItems = [
     { icon: "User", label: "ЛК", active: false },
     { icon: "BarChart3", label: "Аналитика", active: false },
-    { icon: "Store", label: "Магазины", active: true },
+    { icon: "Store", label: "Магазины", active: false },
+    { icon: "Wallet", label: "Бюджет", active: false },
   ];
 
   return (

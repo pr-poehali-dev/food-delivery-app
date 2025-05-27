@@ -1,108 +1,119 @@
 import Header from "@/components/Header";
-import StoreCard from "@/components/StoreCard";
+import AddressSelector from "@/components/AddressSelector";
+import BonusCard from "@/components/BonusCard";
 import RecommendedBasket from "@/components/RecommendedBasket";
-import { Button } from "@/components/ui/button";
+import BottomNavigation from "@/components/BottomNavigation";
 
-// Фиктивные данные для магазинов
-const stores = [
+// Данные бонусных карт магазинов
+const bonusCards = [
   {
-    id: "magnit",
-    name: "Магнит",
-    logo: "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=500&auto=format&fit=crop&q=60",
-    deliveryTime: "30-45 мин",
-    rating: 4.7,
+    storeName: "Магнит",
+    bonusPoints: 1250,
     brandColor: "#E30613",
-    categories: ["Продукты", "Бытовая химия", "Товары для дома"]
+    logo: "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=100&auto=format&fit=crop&q=60",
   },
   {
-    id: "tabris",
-    name: "Табрис",
-    logo: "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=500&auto=format&fit=crop&q=60",
-    deliveryTime: "40-60 мин",
-    rating: 4.9,
-    brandColor: "#35BFB5",
-    categories: ["Премиум продукты", "Фермерские товары", "Деликатесы"]
-  },
-  {
-    id: "lenta",
-    name: "Лента",
-    logo: "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=500&auto=format&fit=crop&q=60",
-    deliveryTime: "35-50 мин",
-    rating: 4.5,
-    brandColor: "#004C9B",
-    categories: ["Продукты", "Электроника", "Одежда"]
-  },
-  {
-    id: "pyaterochka",
-    name: "Пятерочка",
-    logo: "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=500&auto=format&fit=crop&q=60",
-    deliveryTime: "25-40 мин",
-    rating: 4.6,
+    storeName: "Пятерочка",
+    bonusPoints: 890,
     brandColor: "#ED1C24",
-    categories: ["Продукты", "Косметика", "Товары для дома"]
-  }
+    logo: "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=100&auto=format&fit=crop&q=60",
+  },
+  {
+    storeName: "Табрис",
+    bonusPoints: 2100,
+    brandColor: "#35BFB5",
+    logo: "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=100&auto=format&fit=crop&q=60",
+  },
+  {
+    storeName: "Окей",
+    bonusPoints: 654,
+    brandColor: "#FF6B35",
+    logo: "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=100&auto=format&fit=crop&q=60",
+  },
+  {
+    storeName: "Лента",
+    bonusPoints: 1567,
+    brandColor: "#004C9B",
+    logo: "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=100&auto=format&fit=crop&q=60",
+  },
 ];
 
-// Фиктивные данные для рекомендованной корзины
-const recommendedProducts = [
+// Данные для корзин
+const fastDeliveryProducts = [
   {
-    id: "p1",
+    id: "f1",
     name: "Молоко 3.2% 1л",
     price: 89,
-    image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=500&auto=format&fit=crop&q=60",
+    image:
+      "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=500&auto=format&fit=crop&q=60",
     category: "Молочные продукты",
-    quantity: 2
+    quantity: 1,
   },
   {
-    id: "p2",
-    name: "Хлеб белый нарезной",
+    id: "f2",
+    name: "Хлеб белый",
     price: 54,
-    image: "https://images.unsplash.com/photo-1549931319-a545dcf3bc7c?w=500&auto=format&fit=crop&q=60",
+    image:
+      "https://images.unsplash.com/photo-1549931319-a545dcf3bc7c?w=500&auto=format&fit=crop&q=60",
     category: "Хлебобулочные изделия",
-    quantity: 1
+    quantity: 1,
+  },
+];
+
+const budgetProducts = [
+  {
+    id: "b1",
+    name: "Макароны 500г",
+    price: 45,
+    image:
+      "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=500&auto=format&fit=crop&q=60",
+    category: "Бакалея",
+    quantity: 2,
   },
   {
-    id: "p3",
-    name: "Бананы 1кг",
-    price: 119,
-    image: "https://images.unsplash.com/photo-1603833665858-e61d17a86224?w=500&auto=format&fit=crop&q=60",
-    category: "Фрукты",
-    quantity: 1
-  }
+    id: "b2",
+    name: "Гречка 1кг",
+    price: 79,
+    image:
+      "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&auto=format&fit=crop&q=60",
+    category: "Крупы",
+    quantity: 1,
+  },
 ];
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen bg-gray-50 pb-20">
       <Header />
-      <main className="flex-1 container py-6">
-        <section className="mb-8">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold">Выберите магазин</h2>
-            <Button variant="outline">Показать все магазины</Button>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {stores.map((store) => (
-              <StoreCard key={store.id} {...store} />
+      <main className="container py-4">
+        <AddressSelector />
+
+        <section className="mb-6">
+          <h2 className="text-xl font-bold mb-4">Бонусные карты</h2>
+          <div className="flex gap-4 overflow-x-auto pb-2">
+            {bonusCards.map((card, index) => (
+              <BonusCard key={index} {...card} />
             ))}
           </div>
         </section>
-        
-        <section>
-          <h2 className="text-2xl font-bold mb-4">Рекомендуемая корзина</h2>
+
+        <section className="space-y-4">
           <RecommendedBasket
-            title="Ваши регулярные покупки"
-            description="На основе ваших предыдущих заказов"
-            products={recommendedProducts}
-            totalPrice={351}
+            title="Самая быстрая доставка"
+            description="Доставим за 15-20 минут"
+            products={fastDeliveryProducts}
+            totalPrice={143}
+          />
+
+          <RecommendedBasket
+            title="Самая бюджетная корзина"
+            description="Экономия до 30%"
+            products={budgetProducts}
+            totalPrice={169}
           />
         </section>
       </main>
-      <footer className="border-t py-6">
-        <div className="container text-center text-muted-foreground">
-          ПродуктОнлайн © {new Date().getFullYear()}
-        </div>
-      </footer>
+      <BottomNavigation />
     </div>
   );
 };
